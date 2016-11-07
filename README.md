@@ -1,5 +1,5 @@
 #### CORE DATA :blue_heart:
-TODO Core Data from 11/7
+TODO List App Core Data from 11/7
 
 
 PersistentContainer
