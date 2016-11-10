@@ -17,6 +17,7 @@ class DetailViewController: UITableViewController {
     //2 -make an array of subtasks
     var subtaskArray:[Subtask] = []
     
+    //3
     let store = DataStore.sharedInstance
     
     override func viewDidLoad() {
@@ -24,8 +25,11 @@ class DetailViewController: UITableViewController {
         guard let title = task.content else { return }
         self.title = title
         
+        //4 - set your subtaskArray to values in your coreData cast as an array of Subtasks
+        //our "task" is sent from the viewController and set to our local "task" property and we can assign to it our "subtasks"(NSSet) relationship and it then creates an [anyObject] array of our subtasks
         self.subtaskArray = task.subtasks?.allObjects as! [Subtask]
         
+        //5 - reload your table data to reflect your updated array
         tableView.reloadData()
      
     }
@@ -41,7 +45,6 @@ class DetailViewController: UITableViewController {
         if let cellLabel = subtaskArray[indexPath.row].content {
             cell?.textLabel?.text = cellLabel
         }
-        
         cell?.backgroundColor = UIColor.randomColor
         return cell!
     }
@@ -72,19 +75,26 @@ class DetailViewController: UITableViewController {
         present(alert, animated: true)
     }
     
+    //6 - function that saves subtasks from alertController text
     func saveSubtask(titleString:String){
+        
+        //7 - create a managedContext (file cabinet)
        let managedContext = store.persistentContainer.viewContext
     
+        //8 - create a new subtask in our coreData
         var subtask = Subtask(context: managedContext)
-        subtask.content = titleString
-        self.task.addToSubtasks(subtask)
-        self.subtaskArray.append(subtask)
         
+        //9 - assign the content of his new subtask to the alertController text
+        subtask.content = titleString
+        
+        //10 - add this subtask to our task w/ ".addToSubtasks"
+        self.task.addToSubtasks(subtask)
+        
+        //11 - save our new subtask data
         store.saveContext()
         
-        //our "task" is sent from the viewController and set to our local "task" property and we can assign to it our "subtasks"(NSSet) relationship and it then creates an [anyObject] array of our subtasks
-        task.subtasks?.allObjects
-        
+        //12 - make sure this new subtask is added to our local subtaskArray
+        self.subtaskArray.append(subtask)
         
     }
     
