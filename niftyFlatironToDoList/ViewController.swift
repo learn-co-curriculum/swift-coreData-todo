@@ -11,54 +11,83 @@ import Foundation
 import CoreData
 class ViewController: UITableViewController {
     
+    var todos = [Task]()
     
-    var todos: [Lab] = []
+    
     let store = DataStore.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("running")
+        fetchData()
+        self.tableView.reloadData()
         
         
-       
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         fetchData()
     }
+    
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todos.count
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dest = segue.destination as! DetailViewController
+        guard let indexPath = self.tableView.indexPathForSelectedRow?.row else{ return }
+        
+        
+        dest.task = todos[indexPath]
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell")
         cell?.backgroundColor = UIColor.randomColor
-        cell?.textLabel?.text = todos[indexPath.row].name!
+        
+        if let unwrappedTitle = self.todos[indexPath.row].content {
+            cell?.textLabel?.text = unwrappedTitle
+        }
+        
+        
         return cell!
     }
     
     
     func fetchData(){
-        let managedContext = store.persistentContainer.viewContext
-        var fetchRequest = NSFetchRequest<Lab>(entityName: "Lab")
-        do{
-            self.todos = try managedContext.fetch(fetchRequest)
         
+        let managedContext = store.persistentContainer.viewContext
+        let fetchRequest: NSFetchRequest<Task> = Task.fetchRequest()
+        do{
+            
+            self.todos = try managedContext.fetch(fetchRequest)
+            print(todos.count)
+            self.tableView.reloadData()
             
         }catch{
             
         }
-       
+        
+        
+        
     }
     
-
+    
     
     
     
     @IBAction func addBtnPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "Add Lab", message: "Add Topic and Name", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add Todo", message: "Add Todo", preferredStyle: .alert)
         
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
             
@@ -67,21 +96,12 @@ class ViewController: UITableViewController {
             }
             
             
-            let managedContext = self.store.persistentContainer.viewContext
             
-            var entity = NSEntityDescription.entity(forEntityName: "Lab", in: managedContext)
-            var task = NSManagedObject(entity: entity!, insertInto: managedContext) as! Lab
-            task.name = nameToSave
-            do {
-                try managedContext.save()
-                self.todos.append(task)
-            }catch{
-                
-            }
+            self.saveTodo(titleString: nameToSave)
+            //self.todos.append(nameToSave)
             
             
-            //self.labs.append(nameToSave)
-
+            
             
             
             self.tableView.reloadData()
@@ -97,9 +117,30 @@ class ViewController: UITableViewController {
         
         present(alert, animated: true)
     }
-
-
-
+    
+    
+    func saveTodo(titleString:String){
+        let managedContext = store.persistentContainer.viewContext
+        
+        let
+        todo = Task(context: managedContext)
+        print(titleString)
+        todo.content = titleString
+        todo.createdAt = NSDate()
+        
+        do {
+            try managedContext.save()
+            self.todos.append(todo)
+        }catch{
+            
+        }
+        
+        self.tableView.reloadData()
+        
+    }
+    
+    
+    
 }
 
 
@@ -111,9 +152,9 @@ extension UIColor{
             let green = CGFloat(drand48())
             let blue = CGFloat(drand48())
             return UIColor(red: red, green: green, blue: blue, alpha: 0.5)
-
+            
         }
     }
-   
+    
 }
 

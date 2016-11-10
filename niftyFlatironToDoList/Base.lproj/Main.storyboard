@@ -25,6 +25,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zRL-tT-Ihb" kind="show" id="Wah-PF-4vN"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -43,6 +46,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1p4-Wt-IEp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1212" y="93.103448275862078"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="nex-QH-hcR">
+            <objects>
+                <tableViewController id="zRL-tT-Ihb" customClass="DetailViewController" customModule="niftyFlatironToDoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="2cg-ne-T1Q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="subtaskCell" id="ugR-cI-cqa">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ugR-cI-cqa" id="RFs-hZ-L6U">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zRL-tT-Ihb" id="WOk-3X-jqV"/>
+                            <outlet property="delegate" destination="zRL-tT-Ihb" id="x5z-H7-bVS"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="1Gx-Bj-gGX"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="mTD-ew-bPT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="MqK-RB-fal">
+                            <connections>
+                                <action selector="composeBtnPressed:" destination="zRL-tT-Ihb" id="HTV-JU-5oN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Shp-Td-8aA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1959" y="137"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TYZ-YO-LLp">
