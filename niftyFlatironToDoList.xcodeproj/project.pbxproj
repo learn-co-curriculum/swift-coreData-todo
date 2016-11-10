@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4500D7211DD4BFAA0090675C /* Notes.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Notes.playground; sourceTree = "<group>"; };
 		8F2AD3581DD10A17009D8C7D /* niftyFlatironToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = niftyFlatironToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2AD35B1DD10A17009D8C7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F2AD35D1DD10A17009D8C7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +45,7 @@
 		8F2AD34F1DD10A17009D8C7D = {
 			isa = PBXGroup;
 			children = (
+				4500D7211DD4BFAA0090675C /* Notes.playground */,
 				8F2AD35A1DD10A17009D8C7D /* niftyFlatironToDoList */,
 				8F2AD3591DD10A17009D8C7D /* Products */,
 			);

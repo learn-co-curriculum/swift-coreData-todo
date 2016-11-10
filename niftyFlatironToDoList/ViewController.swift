@@ -44,10 +44,12 @@ class ViewController: UITableViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         let dest = segue.destination as! DetailViewController
+        
         guard let indexPath = self.tableView.indexPathForSelectedRow?.row else{ return }
         
-        
+        //pass the right task w/ the array detail
         dest.task = todos[indexPath]
     }
     
